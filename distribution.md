@@ -1,33 +1,33 @@
 # Distributing Your Apps {#distribution}
 
-Now that our application is ready we need to figure out a way to get it to our users. In the [introduction chapter](#introduction) I mentioned that, unlike Apple, Mozilla does not force you to use their distribution channels - we're free to spread our creations as we wish. In this chapter we're going to learn how to distribute our app **outside the [Firefox Marketplace](http://marketplace.firefox.com)**. 
+既然已经开发好应用，我们应该想办法发布给用户。在[introduction chapter](#introduction)章节我提到过，和Apple公司不同，Mozilla基金会并不强制你使用指定的渠道发布应用——你可以按照自己的意愿自由发布作品。本章中，我们将学习如何**在[Firefox Marketplace](http://marketplace.firefox.com)之外**发布我们自己的应用。
 
-In my humble opinion, distributing your application outside the Mozilla Marketplace makes sense in the following two situations. 
+依我拙见，在这两种情况于Mozilla应用市场之外发布应用是明智的选择：
 
- 1. You're developing an application for internal use within your company, or to a restricted/limited group of users. If you ship it to the marketplace then it will be available to anyone and if you want to restrict the usage of the app to a group of people then you will need some kind of authentication scheme with a server backend or something similar. For example, when the *Evernote* application is launched for the first time, it asks the user to log in their servers.   
+1.你开发的是一个在公司内部，或者在一个保密的/人数有限的团体内使用的应用。如果你将应用公开发布到Mozilla应用市场上，那么所有人都可以下载使用它。如果想把使用者限定在一定范围内，就需要配备诸如后端服务器之类的认证方案。例如，当第一次加载*Evernote* 应用时会先要求登录服务器。
 
- 2. You already have a huge user-base that you can tap into for your app distribution. An example of this would be a news paper, like the *Financial Times*, which can simply distribute their app on their own website and reach most of their users. Remember that you can distribute your application outside the marketplace and in the marketplace at the same time, so if you already have your own marketing channel you can leverage that while still using the marketplace for reaching new users outside your own channel.
+2.在发布应用时可以利用你已经拥有的庞大用户群。比如在报纸行业，例如*Financial Times*，可以在官网上面向众多读者上发布他们的应用。记住，你可以同时在应用市场内外发布同一应用。所以你可以在自家发布渠道的之外，利用在Mozilla应用市场的发布吸引新用户。
 
-The distribution process for hosted and packaged apps is similar, but it uses different functions. Thats why I'm discussing them separately. Regardless if your app is hosted or packaged, the workflow is usually the same: you provide a button or link on your own home page that says something similar to **Click to Install Our App**,  or you use a special URL that when launched causes the installation routine to run. In both cases, a dialog is presented to the user asking him or her to confirm that they want to install the given app.
+发布在线和离线应用的流程相似，但是使用不同的API函数。这也是为什么我将他们分开讨论的原因。不区分离线和在线的话，大致的发布流程是：在自己的主页上添加一个诸如**通过点击安装应用**的按钮或链接，或者在用户点击时导向一个触发应用安装程序的特定URL。在这两种情况下，都会向用户弹出一个确认安装指定应用的对话框。
 
-## Hosted Apps 
+## 在线应用
 
 <<[Code for hosted app installation](code/distribution/hosted_apps_distribution.js)
 
-In the sample above `manifestURL` contains the address for the manifest file. When this code runs, the system asks the user to confirm his desire to install the given application and depending on the choice of the user it runs the success or the error callback. 
+以上`manifestURL`包含了指向mainfest文件的链接。代码执行时，系统将要求用户确认自己安装相关应用的意愿，并根据用户的具体选择决定安装与否。
 
-To learn more about this API check [the MDN page about application installation](https://developer.mozilla.org/docs/Apps/JavaScript_API).
+与该API函数的相关的更多内容参见[the MDN page about application installation](https://developer.mozilla.org/docs/Apps/JavaScript_API)。
 
-## Packaged Apps
+## 离线应用
 
-Packaged app installation is similar but instead of calling `mozApps.install()` we call `mozApps.installPackage()` as shown in the sample code below.
+离线应用的安装过程类似，但是我们将用`mozApps.installPackage()`调用取代
+`mozApps.install()`调用，如下图示：
 
 <<[Code for packaged app installation](code/distribution/packaged_apps_distribution.js)
 
-W> Warning: I have the impression that packaged app installation outside of the marketplace is not possible on Firefox OS version 1.0.1. Even though the API is documented, I have never tried it. Please if you try it, send me feedback so that I can update this book.
+W> 注意：我记得在Firefox OS 1.0.1版本中不能在Mozilla市场之外安装离线应用。尽管官方已经发布该API函数，我自己还没有践行过。如果你试用过的话，请向我反馈以更新本书内容。
 
-## Summary
+## 总结
+本章讨论了在Firefox应用市场之外使用安装和管理API函数发布*开放Web应用程序*的各种选择。你还可以在网页上添加检测应用是否已安装的代码（这样就可以在已经安装的情况下隐藏*点击安装应用*的按钮）。相关API函数的更多内容参见[MDN page about application installation](https://developer.mozilla.org/docs/Apps/JavaScript_API) (没错，之前已经给出过这个链接了，快去浏览吧！那里包含了很多重要的源码)。
 
-This chapter discussed options for distributing applications outside of the Firefox Marketplace by using the installation and management APIs for *Open Web Apps*. There are many other routines available to do things such as checking if your application is installed (so that you can hide that *Click Here To Install* button). To learn more about those APIs check out the [MDN page about application installation](https://developer.mozilla.org/docs/Apps/JavaScript_API) (yes, gave you this link before - this time, click it! There is important stuff there).
-
-In the next chapter we're going to learn how to distribute our apps through the Firefox Marketplace.
+在下章中我们将学习如何在Firefox应用市场中发布应用。
